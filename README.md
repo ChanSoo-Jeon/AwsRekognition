@@ -1,6 +1,6 @@
 # AwsRekognition
 
-# Analysis of data using R in a Jupyter Notebook
+# AWS의 Rekognition을 사용해서 mp4 파일 내의 객체를 인식하고 해당 객체에 매핑된 가격 출력!
 
 
 ![js](https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white)
