@@ -3,9 +3,9 @@ import cv2
 import os
 
 object_images = {
-    'Laptop': '18.JPG',
-    'Mobile Phone': '23.JPG',
-    'Headphones': '45.JPG'
+    'Laptop': 'laptop.JPG',
+    'Mobile Phone': 'phone.JPG',
+    'Headphones': 'headphone.JPG'
 }
 
 #AWS 계정 정보
@@ -22,7 +22,7 @@ rekognition = boto3.client(
 )
 
 # 비디오 파일 경로
-video_path = 'KakaoTalk_20231206_155751412.mp4'
+video_path = 'your_video.mp4'
 printed_labels = set()
 # OpenCV를 사용하여 비디오 읽기
 cap = cv2.VideoCapture(video_path)
@@ -31,6 +31,7 @@ frame_count = 0
 frame_rate = cap.get(cv2.CAP_PROP_FPS)
 frame_interval = int(frame_rate)
 
+#object 가격 매핑
 object_prices = {
     'Laptop': 'KRW 2,390,000',
     'Mobile Phone': 'KRW 999,900',
@@ -63,7 +64,7 @@ while cap.isOpened():
 
         found_objects = {}
         for label in response['Labels']:
-            if label['Name'] in object_prices and label['Confidence'] >= 99:
+            if label['Name'] in object_prices and label['Confidence'] >= 99: #정확도 99이상만 체크
                 price = object_prices[label['Name']]
                 image_path = object_images[label['Name']]
                 if label['Name'] not in printed_labels:  # 중복 체크
@@ -76,11 +77,11 @@ while cap.isOpened():
                 print(f"Object: {obj}, Price: {data['price']}")
                 image = cv2.imread(data['image_path'])
                 cv2.imshow(f"{obj}", image)
-                cv2.waitKey(3000) #이미지를 2초간 보여줌 3000->3초
+                cv2.waitKey(3000) #이미지를 3초간 보여줌 5000->5초
                 # 이미지를 보여준 후 자동으로 창을 닫음
                 cv2.destroyAllWindows()
 
-
+    #저장된 frame images 삭제
     os.remove(frame_filename)
 
 
