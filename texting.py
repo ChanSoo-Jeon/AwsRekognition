@@ -4,8 +4,8 @@ import boto3
 rekognition = boto3.client('rekognition')
 
 # S3 버킷 이름과 파일명 설정
-bucket_name = 'cchomework'
-file_name = 'text-1.jpg'
+bucket_name = 'bucket_name'
+file_name = 'file_name'
 
 response = rekognition.detect_text(
     Image={
