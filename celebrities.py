@@ -4,8 +4,8 @@ import boto3
 rekognition = boto3.client('rekognition')
 
 # S3 버킷 이름과 파일명 설정
-bucket_name = 'cchomework'
-file_name = 'whoami-1.jpg'
+bucket_name = 'bucket_name'
+file_name = 'file_name'
 
 # Rekognition을 이용하여 유명인 인식
 response_celeb = rekognition.recognize_celebrities(
